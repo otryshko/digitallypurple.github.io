@@ -17,11 +17,8 @@ export function DigitallyPurple() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Here you would typically send the formData to your backend
     console.log('Form submitted:', formData)
-    // Reset form after submission
     setFormData({ name: '', email: '', message: '' })
-    // You might want to show a success message to the user here
   }
 
   return (
@@ -35,7 +32,7 @@ export function DigitallyPurple() {
                 <li key={item}>
                   <Button
                     variant="link"
-                    className="text-white"
+                    className={`text-white ${activeTab === item.toLowerCase() ? 'bg-purple-700 rounded-md' : ''}`}
                     onClick={() => setActiveTab(item.toLowerCase())}
                   >
                     {item}

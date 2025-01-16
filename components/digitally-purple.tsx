@@ -1,14 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowRight, CheckCircle, Code, Mail, Zap, Presentation } from 'lucide-react'
 
 export function DigitallyPurple() {
+  const router = useRouter()
+  const pathname = usePathname()
   const [activeTab, setActiveTab] = useState('home')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+
+  const pathMap = {
+    'home': '/',
+    'services': '/services',
+    'powerpoint add-in': '/powerpoint-add-in',
+    'about': '/about',
+    'contact': '/contact'
+  }
+
+  useEffect(() => {
+    const currentPath = pathname.replace('/', '')
+    if (currentPath === '') {
+      setActiveTab('home')
+    } else if (currentPath === 'powerpoint-add-in') {
+      setActiveTab('powerpoint add-in')
+    } else {
+      setActiveTab(currentPath)
+    }
+  }, [pathname])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -19,6 +41,12 @@ export function DigitallyPurple() {
     e.preventDefault()
     console.log('Form submitted:', formData)
     setFormData({ name: '', email: '', message: '' })
+  }
+
+  const handleNavigation = (path: string) => {
+    const routePath = pathMap[path as keyof typeof pathMap]
+    router.push(routePath)
+    setActiveTab(path)
   }
 
   return (
@@ -33,7 +61,7 @@ export function DigitallyPurple() {
                   <Button
                     variant="link"
                     className={`text-white ${activeTab === item.toLowerCase() ? 'bg-purple-700 rounded-md' : ''}`}
-                    onClick={() => setActiveTab(item.toLowerCase())}
+                    onClick={() => handleNavigation(item.toLowerCase())}
                   >
                     {item}
                   </Button>

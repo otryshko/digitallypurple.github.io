@@ -194,7 +194,7 @@ export function DigitallyPurple() {
 
       <footer className="bg-purple-900 text-white p-4 mt-12">
         <div className="container mx-auto text-center">
-          <p>&copy; 2024 Digitally Purple. All rights reserved.</p>
+          <p>&copy; 2025 Digitally Purple. All rights reserved.</p>
         </div>
       </footer>
     </div>

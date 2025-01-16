@@ -11,7 +11,16 @@ import Link from 'next/link'
 export function DigitallyPurple() {
   const router = useRouter()
   const pathname = usePathname()
-  const [activeTab, setActiveTab] = useState('home')
+  
+  // Initialize activeTab based on pathname
+  const getInitialTab = () => {
+    const path = pathname.replace('/', '')
+    if (path === '') return 'home'
+    if (path === 'powerpoint-add-in') return 'powerpoint add-in'
+    return path
+  }
+
+  const [activeTab, setActiveTab] = useState(getInitialTab())
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
 
   const pathMap = {
@@ -24,14 +33,7 @@ export function DigitallyPurple() {
   }
 
   useEffect(() => {
-    const currentPath = pathname.replace('/', '')
-    if (currentPath === '') {
-      setActiveTab('home')
-    } else if (currentPath === 'powerpoint-add-in') {
-      setActiveTab('powerpoint add-in')
-    } else {
-      setActiveTab(currentPath)
-    }
+    setActiveTab(getInitialTab())
   }, [pathname])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

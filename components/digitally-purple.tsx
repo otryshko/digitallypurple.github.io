@@ -78,7 +78,7 @@ export function DigitallyPurple({ children }: { children: React.ReactNode }) {
       <footer className="bg-purple-900 text-white p-4 mt-12">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2025 Digitally Purple. All rights reserved.</p>
+            <p>&copy; 2026 Digitally Purple. All rights reserved.</p>
             <div className="mt-2 md:mt-0">
               <Link 
                 href="/privacy" 
